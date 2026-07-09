@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Headphone Store | فروشگاه هدفون</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg2:#111827;
+      --card:rgba(255,255,255,.06);
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --primary:#7c3aed;
+      --secondary:#22d3ee;
+      --accent:#38bdf8;
+      --border:rgba(255,255,255,.12);
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;font-family:tahoma, sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:
+        radial-gradient(circle at top right, rgba(124,58,237,.22), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(34,211,238,.16), transparent 25%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px,92%);margin:auto;}
+
+    /* NAV */
+    nav{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter: blur(18px);
+      background: rgba(10, 15, 30, .72);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:16px 0; gap:16px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;font-weight:800;
+    }
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      box-shadow:0 0 24px rgba(124,58,237,.35);
+    }
+    .nav-links{
+      display:flex;gap:18px;flex-wrap:wrap;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .nav-links a:hover{color:var(--text)}
+    .btn{
+      border:none;cursor:pointer;border-radius:14px;
+      padding:11px 16px;font-weight:700;
+      transition:.25s;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:white;
+      box-shadow:0 0 30px rgba(124,58,237,.25);
+    }
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-ghost{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+
+    /* HERO */
+    .hero{
+      padding:70px 0 40px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+      align-items:center;
+    }
+    .hero-text{
+      padding:24px 8px;
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 14px;border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--border);
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+    .hero h1{
+      font-size:clamp(2rem,5vw,4rem);
+      line-height:1.15;
+      margin-bottom:14px;
+    }
+    .hero h1 span{
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero p{
+      color:var(--muted);
+      line-height:1.9;
+      max-width:62ch;
+      margin-bottom:22px;
+      font-size:1.02rem;
+    }
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+    .product-preview{
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height:420px;
+    }
+    .product-preview::before{
+      content:"";
+      position:absolute;inset:-60px;
+      background:radial-gradient(circle, rgba(34,211,238,.25), transparent 45%);
+      pointer-events:none;
+    }
+    .headphone{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:180px;
+      opacity:.95;
+      transform:rotate(-8deg);
+      text-shadow:0 0 35px rgba(34,211,238,.2);
+    }
+    .product-card{
+      position:absolute;
+      right:24px;
+      bottom:24px;
+      left:24px;
+      background:rgba(8,12,24,.72);
+      border:1px solid var(--border);
+      backdrop-filter: blur(16px);
+      border-radius:22px;
+      padding:18px;
+    }
+    .product-card h3{margin-bottom:8px}
+    .product-card p{color:var(--muted);font-size:.95rem;line-height:1.7}
+    .price{
+      margin-top:12px;
+      font-size:1.2rem;
+      color:#fff;
+      font-weight:800;
+    }
+
+    /* SECTIONS */
+    section{padding:24px 0;}
+    .section-title{
+      display:flex;justify-content:space-between;align-items:end;gap:16px;
+      margin-bottom:18px;
+    }
+    .section-title h2{font-size:1.5rem}
+    .section-title p{color:var(--muted)}
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    .product{
+      transition:.25s;
+    }
+    .product:hover{transform:translateY(-4px)}
+    .product .img{
+      height:180px;border-radius:18px;margin-bottom:16px;
+      background:linear-gradient(135deg, rgba(124,58,237,.25), rgba(34,211,238,.18));
+      border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:72px;
+    }
+    .product h3{margin-bottom:8px}
+    .product p{color:var(--muted);line-height:1.8;font-size:.95rem}
+    .meta{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-top:14px;
+      color:#fff;
+      font-weight:700;
+    }
+    .meta span{color:var(--muted);font-weight:400}
+
+    .feature{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      border-radius:18px;
+    }
+    .icon{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      display:flex;align-items:center;justify-content:center;
+      flex:0 0 auto;
+    }
+    .feature h3{margin-bottom:6px}
+    .feature p{color:var(--muted);line-height:1.8;font-size:.95rem}
+
+    .review{
+      display:flex;flex-direction:column;gap:10px;
+    }
+    .stars{color:#fbbf24;letter-spacing:2px}
+    .review p{color:var(--muted);line-height:1.9}
+    .review strong{color:#fff}
+
+    .contact{
+      display:grid;
+      gap:12px;
+    }
+    .contact-item{
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding:14px 16px;border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+    }
+    .contact-item span{color:var(--muted)}
+
+    footer{
+      padding:28px 0 44px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    .reveal{opacity:0;transform:translateY(18px);transition:.7s ease;}
+    .reveal.show{opacity:1;transform:translateY(0);}
+
+    @media (max-width: 900px){
+      .hero-grid,.grid-3,.grid-2{grid-template-columns:1fr;}
+      .nav-inner{flex-direction:column;align-items:flex-start;}
+      .hero{padding-top:34px;}
+      .product-preview{min-height:360px;}
+      .headphone{font-size:140px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div>Headphone Store</div>
+          <small style="color:var(--muted)">فروشگاه تخصصی هدفون</small>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#products">محصولات</a>
+        <a href="#features">ویژگی‌ها</a>
+        <a href="#reviews">نظرات</a>
+        <a href="#contact">تماس</a>
+      </div>
+
+      <a href="#products" class="btn btn-primary">خرید کن</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text reveal">
+          <div class="badge">🎧 بهترین هدفون‌ها برای موسیقی، بازی و کار</div>
+          <h1>تجربه صدای <span>فوق‌العاده</span> را با هدفون‌های حرفه‌ای لمس کن</h1>
+          <p>
+            در فروشگاه ما می‌توانی جدیدترین مدل‌های هدفون بی‌سیم، گیمینگ، نویزکنسلینگ و حرفه‌ای را با قیمت مناسب و کیفیت بالا پیدا کنی.
+          </p>
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-primary">مشاهده محصولات</a>
+            <a href="#features" class="btn btn-ghost">چرا ما؟</a>
+          </div>
+        </div>
+
+        <div class="product-preview reveal">
+          <div class="headphone">🎧</div>
+          <div class="product-card">
+            <h3>Headphone Pro X</h3>
+            <p>هدفون بی‌سیم با صدای شفاف، باس قدرتمند، طراحی ارگونومیک و باتری بادوام.</p>
+            <div class="price">3,490,000 تومان</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="reveal">
+      <div class="section-title">
+        <h2>محصولات ویژه</h2>
+        <p>پرفروش‌ترین مدل‌ها</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card product">
+          <div class="img">🎧</div>
+          <h3>هدفون بی‌سیم Pro X</h3>
+          <p>نویزکنسلینگ، کیفیت صدای بالا، مناسب موسیقی و استفاده روزمره.</p>
+          <div class="meta"><strong>3,490,000 تومان</strong><span>موجود</span></div>
+        </div>
+
+        <div class="card product">
+          <div class="img">🎮</div>
+          <h3>هدفون گیمینگ Storm</h3>
+          <p>صدای سه‌بعدی، میکروفن قوی، مناسب بازی و استریم.</p>
+          <div class="meta"><strong>2,850,000 تومان</strong><span>موجود</span></div>
+        </div>
+
+        <div class="card product">
+          <div class="img">🎵</div>
+          <h3>هدفون Studio Bass</h3>
+          <p>مناسب تولید محتوا، صدای دقیق، راحتی بالا و طراحی حرفه‌ای.</p>
+          <div class="meta"><strong>4,120,000 تومان</strong><span>موجود</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="reveal">
+      <div class="section-title">
+        <h2>چرا فروشگاه ما؟</h2>
+        <p>مزیت‌هایی که مشتری را جذب می‌کند</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="feature card">
+          <div class="icon">⚡</div>
+          <div>
+            <h3>ارسال سریع</h3>
+            <p>سفارش‌ها در کوتاه‌ترین زمان پردازش و ارسال می‌شوند.</p>
+          </div>
+        </div>
+
+        <div class="feature card">
+          <div class="icon">🎧</div>
+          <div>
+            <h3>تنوع بالا</h3>
+            <p>انواع هدفون بی‌سیم، باس‌دار، گیمینگ و استودیویی در یکجا.</p>
+          </div>
+        </div>
+
+        <div class="feature card">
+          <div class="icon">✅</div>
+          <div>
+            <h3>گارانتی معتبر</h3>
+            <p>محصولات با ضمانت کیفیت و خدمات پس از فروش ارائه می‌شوند.</p>
+          </div>
+        </div>
+
+        <div class="feature card">
+          <div class="icon">💎</div>
+          <div>
+            <h3>قیمت رقابتی</h3>
+            <p>قیمت مناسب همراه با کیفیت بالا برای انتخابی مطمئن.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="reveal">
+      <div class="section-title">
+        <h2>نظرات مشتریان</h2>
+        <p>اعتمادسازی برای فروش بیشتر</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <p>«کیفیت صدا عالی بود و ارسال خیلی سریع انجام شد. کاملاً راضی‌ام.»</p>
+          <strong>– امیر</strong>
+        </div>
+
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <p>«برای گیمینگ خریدم، میکروفن و صدای سه‌بعدی واقعاً خوبه.»</p>
+          <strong>– سارا</strong>
+        </div>
+
+        <div class="card review">
+          <div class="stars">★★★★☆</div>
+          <p>«طراحی خیلی شیکه و باتری هم خیلی خوب جواب می‌ده.»</p>
+          <strong>– محمد</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="section-title">
+        <h2>تماس با ما</h2>
+        <p>راه‌های ارتباطی فروشگاه</p>
+      </div>
+
+      <div class="card contact">
+        <div class="contact-item"><b>ایمیل</b><span>xyz@gmail.com</span></div>
+        <div class="contact-item"><b>شماره تماس</b><span>09123456789</span></div>
+        <div class="contact-item"><b>اینستاگرام</b><span>@xyz</span></div>
+        <div class="contact-item"><b>آدرس</b><span>کشور، شهر، منطقه، بلوار، خیابان، کوچه، پلاک، طبقه</span></div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Headphone Store | فروشگاه تخصصی هدفون
+    </footer>
+  </main>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
