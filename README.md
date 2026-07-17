@@ -1,6 +1,7 @@
 <div align="center">
 
-# 🎧 Headphone Store Website
+# Headphone Store Website
+# 🎧🎮⚡🎵🎧
 
 ### A Modern Online Headphone Shopping Experience
 
