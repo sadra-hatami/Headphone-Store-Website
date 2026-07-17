@@ -1,4 +1,4 @@
-# Headphone_Store_Website
+# Headphone-Store-Website
 
 ***
 
@@ -19,6 +19,6 @@ Specialized Headphone Store Site
 
 ***
 
-🌐 وبسایت برنامه: https://sadra-hatami.github.io/Rock_Paper_Scissors/
+🌐 وبسایت برنامه: https://sadra-hatami.github.io/Headphone-Store-Website/
 
 📧 ایمیل سازنده برنامه: sadra.hatami.1732@gmail.com
